@@ -1,32 +1,43 @@
 {
-  "name": "tailwind-project",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
+  "name": "which",
+  "description": "Like which(1) unix command. Find the first instance of an executable in the PATH.",
+  "version": "2.0.2",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/isaacs/node-which.git"
   },
+  "main": "which.js",
+  "bin": {
+    "node-which": "./bin/node-which"
+  },
+  "license": "ISC",
   "dependencies": {
-    "aos": "^3.0.0-beta.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.12.0",
-    "react-scroll": "^1.9.0"
+    "isexe": "^2.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6",
-    "vite": "^5.0.8"
+    "mkdirp": "^0.5.0",
+    "rimraf": "^2.6.2",
+    "tap": "^14.6.9"
+  },
+  "scripts": {
+    "test": "tap",
+    "preversion": "npm test",
+    "postversion": "npm publish",
+    "prepublish": "npm run changelog",
+    "prechangelog": "bash gen-changelog.sh",
+    "changelog": "git add CHANGELOG.md",
+    "postchangelog": "git commit -m 'update changelog - '${npm_package_version}",
+    "postpublish": "git push origin --follow-tags"
+  },
+  "files": [
+    "which.js",
+    "bin/node-which"
+  ],
+  "tap": {
+    "check-coverage": true
+  },
+  "engines": {
+    "node": ">= 8"
   }
 }
